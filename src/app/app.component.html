@@ -1,0 +1,93 @@
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h3>Registration form</h3>
+
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label> userId:
+              <input type="text" class="form-control form-control-sm" placeholder="userId"
+                formControlName="userId" [ngClass]="{ 'is-invalid': submitted && f.userId.errors }">
+              <div *ngIf="submitted && f.userId.errors" class="invalid-feedback">
+                <div *ngIf="f.userId.errors.required">Id is required</div>
+              </div>
+            </label>
+          </div>        
+
+          <div class="form-group">
+            <label> Title:
+              <input type="text" class="form-control form-control-sm" placeholder="title"
+                formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+              <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                <div *ngIf="f.title.errors.required">title is required</div>
+              </div>
+            </label>
+          </div>  
+
+          <div class="form-group">
+            <label> Body content:
+              <input type="text" class="form-control form-control-sm" placeholder="Body content" formControlName="body"
+                [ngClass]="{ 'is-invalid': submitted && f.body.errors }">
+              <div *ngIf="submitted && f.body.errors" class="invalid-feedback">
+                <div *ngIf="f.body.errors.required">Body content is required</div>
+              </div>
+            </label>
+          </div>
+         
+          
+
+          <div class="form-group">
+            <button class="btn btn-primary">Register</button>
+          </div>
+
+        </form>
+        <div *ngIf="flag">
+        <label>Post data</label>        
+        <p >ID: {{objPost.id}}</p>
+        <p>User Id: {{objPost.userId}}</p>        
+        <p>Title: {{objPost.title}}</p>
+        <p>Body: {{objPost.body}}</p>
+      </div>
+        <label>Get data with paramete</label>
+        <table>
+          <tr *ngFor="let x of listOfPosts">
+            <td>{{x.id}}</td>
+            <td>{{x.userId}}</td>
+            <td>{{x.title}}</td>
+            <td>{{x.body}}</td>
+          </tr>
+        </table>
+
+        <label>Get all datas</label>
+        <ngx-datatable class="material" [rows]="listComments" [columnMode]="'force'" [headerHeight]="40"
+          [footerHeight]="40" [rowHeight]="30" [scrollbarV]="true" [sorts]="[{prop: 'age', dir: 'desc'}]">
+
+          <ngx-datatable-column name="Id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Email">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.email}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Nmae">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.name}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Body">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.body}}
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+
+      </div>
+    </div>
+  </div>
+</div>
